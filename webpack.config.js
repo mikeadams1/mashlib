@@ -8,7 +8,7 @@ module.exports = (env, args) => {
   return {
     mode: args.mode || 'development',
     entry: [
-      './src/index.js'
+      './src/index.ts'
     ],
     output: {
       path: path.join(__dirname, '/dist/'),
@@ -20,9 +20,11 @@ module.exports = (env, args) => {
     module: {
       rules: [
         {
-          test: /\.js$/,
-          loader: 'babel-loader',
-          exclude: /node_modules/
+          test: /\.(mjs|js|ts)$/,
+          exclude: /(node_modules|bower_components)/,
+          use: {
+            loader: 'babel-loader',
+          }
         },
         {
           test: /^.*\/solid-app-set\/.*\.js$/,
